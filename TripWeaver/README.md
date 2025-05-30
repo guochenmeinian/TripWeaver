@@ -1,0 +1,1 @@
+Note: put `.env` here then add `GOOGLE_API_KEY` for the agents to work.

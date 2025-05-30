@@ -3,7 +3,8 @@
 
 from google.adk.agents import Agent
 from TripWeaver.prompt import ROOT_AGENT_INSTR
-
+from TripWeaver.sub_agents.pre_trip.agent import pre_trip_agent
+from TripWeaver.sub_agents.planning.agent import planning_agent
 from TripWeaver.tools.memory import _load_precreated_itinerary
 
 root_agent = Agent(
@@ -11,13 +12,13 @@ root_agent = Agent(
     name="root_agent",
     description="A Travel Conceirge using the services of multiple sub-agents",
     instruction=ROOT_AGENT_INSTR,
-    # sub_agents=[
+    sub_agents=[
     #     inspiration_agent,
-    #     planning_agent,
+    planning_agent,
     #     booking_agent,
-    #     pre_trip_agent,
+    pre_trip_agent,
     #     in_trip_agent,
     #     post_trip_agent,
-    # ],
+    ],
     before_agent_callback=_load_precreated_itinerary,
 )
