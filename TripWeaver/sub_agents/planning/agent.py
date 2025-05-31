@@ -1,5 +1,5 @@
-# sub_agents/planning/agent.py
 from google.adk.agents import Agent
+from TripWeaver.sub_agents.planning import prompt
 
 def get_weather(city: str) -> dict:
     """Retrieves the current weather report for a specified city.
@@ -24,14 +24,10 @@ def get_weather(city: str) -> dict:
             "error_message": f"Weather information for '{city}' is not available.",
         }
 
-get_weather_agent = Agent(
-    name="get_weather_agent",
+planning_agent = Agent(
+    name="planning_agent",
     model="gemini-2.0-flash",
-    description=(
-        "Agent to answer questions about the time and weather in a city."
-    ),
-    instruction=(
-        "You are a helpful agent who can answer user questions about the time and weather in a city."
-    ),
-    tools=[get_weather],
+    description="Generates travel itineraries based on user input and optionally checks weather.",
+    instruction=prompt.PLANNING_AGENT_INSTR,
+    tools=[get_weather],  # 👈 你也可以继续添加更多工具
 )
