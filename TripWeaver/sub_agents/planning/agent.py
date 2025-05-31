@@ -1,33 +1,16 @@
+import os
+import requests
+from dotenv import load_dotenv
 from google.adk.agents import Agent
 from TripWeaver.sub_agents.planning import prompt
-
-def get_weather(city: str) -> dict:
-    """Retrieves the current weather report for a specified city.
-
-    Args:
-        city (str): The name of the city for which to retrieve the weather report.
-
-    Returns:
-        dict: status and result or error msg.
-    """
-    if city.lower() == "new york":
-        return {
-            "status": "success",
-            "report": (
-                "The weather in New York is sunny with a temperature of 25 degrees"
-                " Celsius (77 degrees Fahrenheit)."
-            ),
-        }
-    else:
-        return {
-            "status": "error",
-            "error_message": f"Weather information for '{city}' is not available.",
-        }
+from TripWeaver.tools.weather import get_weather_forecast
+from TripWeaver.tools.geocoding import get_geolocation
+from TripWeaver.tools.distance import get_distance
 
 planning_agent = Agent(
     name="planning_agent",
     model="gemini-2.0-flash",
     description="Generates travel itineraries based on user input and optionally checks weather.",
     instruction=prompt.PLANNING_AGENT_INSTR,
-    tools=[get_weather],  # 👈 你也可以继续添加更多工具
+    tools=[get_weather_forecast, get_geolocation, get_distance],
 )
