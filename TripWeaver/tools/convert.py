@@ -4,6 +4,7 @@ from TripWeaver.shared_libraries.types import GeminiSpot, Spot
 from datetime import time
 from TripWeaver.shared_libraries.types import LocalizedString, Location, TimeSlot, Rating
 
+
 # Add conversion helper from FlatSpot → Spot
 # (for use by the itinerary planner or internal logic)
 
@@ -18,3 +19,4 @@ def gemini_spot_to_spot(gemini_spot: GeminiSpot) -> Spot:
         rating=Rating(overall=gemini_spot.rating or 4.0) if gemini_spot.rating else None,
         confirmed=False
     )
+

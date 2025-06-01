@@ -34,7 +34,7 @@ poi_agent = Agent(
 inspiration_agent = Agent(
     model="gemini-2.0-flash",
     name="inspiration_agent",
-    description="A travel inspiration agent who inspire users, and discover their next vacations; Provide information about places, activities, interests,",
+    description="A travel inspiration agent who inspire users, and discover their next vacations; Provide information about places, activities, interests.",
     instruction=prompt.INSPIRATION_AGENT_INSTR,
     tools=[AgentTool(agent=place_agent), AgentTool(agent=poi_agent), map_tool],
 )

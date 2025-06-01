@@ -124,3 +124,4 @@ class Spot(BaseModel):
     confirmed: bool = False
 
 
+
