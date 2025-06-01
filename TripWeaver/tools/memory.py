@@ -10,7 +10,6 @@ from google.adk.sessions.state import State
 from google.adk.tools import ToolContext
 
 from TripWeaver.shared_libraries import constants
-from TripWeaver.shared_libraries.types import TripPlan
 from pydantic import ValidationError
 
 # Path to initial scenario file
@@ -52,39 +51,6 @@ def forget(key: str, value: str, tool_context: ToolContext):
     if value in state[key]:
         state[key].remove(value)
     return {"status": f'Removed "{key}": "{value}"'}
-
-
-def get_trip_plan(state: State) -> Optional[TripPlan]:
-    """
-    Retrieve the TripPlan object from session state.
-    """
-    raw = state.get(TRIP_PLAN_KEY)
-    if raw:
-        try:
-            return TripPlan.parse_obj(raw)
-        except ValidationError as e:
-            print(f"TripPlan validation error: {e}")
-            return None
-    return None
-
-
-def set_trip_plan(state: State, plan: TripPlan) -> None:
-    """
-    Store a TripPlan object into session state.
-    """
-    state[TRIP_PLAN_KEY] = json.loads(plan.json())
-
-
-def update_trip_plan(state: State, update_fn: Callable[[TripPlan], None]) -> Optional[TripPlan]:
-    """
-    Update the TripPlan in session memory using a provided update function.
-    """
-    plan = get_trip_plan(state)
-    if not plan:
-        return None
-    update_fn(plan)
-    set_trip_plan(state, plan)
-    return plan
 
 
 def _set_initial_states(source: Dict[str, Any], target: State | dict[str, Any]):
