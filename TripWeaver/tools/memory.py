@@ -20,6 +20,13 @@ SAMPLE_SCENARIO_PATH = os.getenv(
 # Key used in memory state for storing the trip plan
 TRIP_PLAN_KEY = "trip_plan"
 
+def get_by_path(state: dict, path: str, delimiter: str = "/") -> dict:
+    keys = path.split(delimiter)
+    current = state
+    for k in keys:
+        current = current.setdefault(k, {})
+    return current
+
 
 def memorize_list(key: str, value: str, tool_context: ToolContext):
     """

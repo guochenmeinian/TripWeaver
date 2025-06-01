@@ -15,7 +15,7 @@ place_agent = Agent(
     disallow_transfer_to_parent=True,
     disallow_transfer_to_peers=True,
     output_schema=GeminiSpotSuggestions,
-    output_key="place",
+    output_key="place_suggestions",
     generate_content_config=json_response_config,
 )
 
@@ -27,7 +27,7 @@ poi_agent = Agent(
     disallow_transfer_to_parent=True,
     disallow_transfer_to_peers=True,
     output_schema=POISuggestions,
-    output_key="poi",
+    output_key="poi_suggestions",
     generate_content_config=json_response_config,
 )
 
