@@ -59,6 +59,19 @@ class GeminiUserProfile(BaseModel):
     home: GeminiHomeAddress
 
 
+class HousingOption(BaseModel):
+    name: str
+    price_per_night: str
+    location: str
+    url: Optional[str] = None
+    description: Optional[str] = None
+    num_beds: str
+
+class HousingResults(BaseModel):
+    housing_options: List[HousingOption]
+
+
+
 
 # === Full Spot for itinerary/planning ===
 class LocalizedString(BaseModel):

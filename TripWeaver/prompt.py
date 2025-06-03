@@ -16,12 +16,7 @@ ROOT_AGENT_INSTR = """
 - Please use only the agents and tools to fulfill all user rquest
 - If the user just starts the conversation and you don't know much about the user, transfer to the agent `pre_trip_agent`
 - If the user asks about vacation inspiration or things to do, transfer to the agent `inspiration_agent`
-- Please use the context info below for any user preferences
-               
-Current user:
-  <user_profile>
-  {user_profile}
-  </user_profile>
+- If the user asks about housing options, transfer to the agent `housing_agent`
 
 Current time: {_time}
       
