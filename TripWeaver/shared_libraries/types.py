@@ -1,4 +1,4 @@
-from typing import Optional, List, Literal, Dict, Union
+from typing import Optional, List, Literal, Dict, Union, Any
 from pydantic import BaseModel, Field, HttpUrl
 from datetime import date, time, datetime
 from google.genai import types
@@ -40,6 +40,24 @@ class GeminiSpot(BaseModel):
 
 class GeminiSpotSuggestions(BaseModel):
     spots: List[GeminiSpot]
+
+
+class GeminiHomeAddress(BaseModel):
+    event_type: str
+    address: str
+    local_prefer_mode: str
+
+
+class GeminiUserProfile(BaseModel):
+    passport_nationality: str
+    seat_preference: str
+    food_preference: str
+    allergies: List[str]
+    likes: List[str]
+    dislikes: List[str]
+    price_sensitivity: List[str]
+    home: GeminiHomeAddress
+
 
 
 # === Full Spot for itinerary/planning ===

@@ -1,18 +1,19 @@
 {
-    "state": {
+  "state": 
+    {
       "user_profile" : {
-        "passport_nationality" : "US Citizen",
-        "seat_preference": "window",
-        "food_preference": "N/A",
+        "passport_nationality" : "",
+        "seat_preference": "",
+        "food_preference": "",
         "allergies": [],
         "likes": [],
         "dislikes": [],
         "price_sensitivity": [],
         "home":
           {
-              "event_type": "home",
-              "address": "6420 Sequence Dr #400, San Diego, CA 92121, United States",
-              "local_prefer_mode": "drive"
+              "event_type": "",
+              "address": "",
+              "local_prefer_mode": ""
           }
       },
       

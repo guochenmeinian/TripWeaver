@@ -68,8 +68,8 @@ Return the response as a JSON object:
   ]
 }}
 """
-"""Use the tool `latlon_tool` with the name or address of the place to find its longitude and latitude."""
 
+"""Use the tool `map_tool` with the name or address of the place to find its longitude and latitude."""
 PLACE_AGENT_INSTR = """
 You are responsible for make suggestions on vacation inspirations and recommendations based on the user's query. Limit the choices to 3 results.
 Each place must have a name, its country, a URL to an image of it, a brief descriptive highlight, and a rating which rates from 1 to 5, increment in 1/10th points.

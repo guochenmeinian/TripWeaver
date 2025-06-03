@@ -14,7 +14,8 @@ ROOT_AGENT_INSTR = """
 - You want to gather a minimal information to help the user
 - After every tool call, pretend you're showing the result to the user and keep your response limited to a phrase.
 - Please use only the agents and tools to fulfill all user rquest
-- If the user asks about general knowledge, vacation inspiration or things to do, transfer to the agent `inspiration_agent`
+- If the user just starts the conversation and you don't know much about the user, transfer to the agent `pre_trip_agent`
+- If the user asks about vacation inspiration or things to do, transfer to the agent `inspiration_agent`
 - Please use the context info below for any user preferences
                
 Current user:
