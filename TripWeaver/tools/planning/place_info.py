@@ -1,6 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
+from google.adk.tools import FunctionTool
 
 load_dotenv()
 GOOGLE_MAPS_API_KEY = os.getenv("MAP_PLATFORM_API_KEY")
@@ -21,10 +22,24 @@ def find_place_id(place_name: str, location: str = None) -> str:
     return candidates[0]["place_id"]
 
 
+
 def get_place_opening_hours(place_name: str, location: str) -> dict:
     """
-    Returns the opening hours of a specific place (if available).
+    Fetches the weekday opening hours of a given place using the Google Places API.
+
+    Parameters:
+    - place_name: The name of the place (e.g., 'British Museum')
+    - location: A broader location context to disambiguate (e.g., 'London')
+
+    Returns:
+    - A dictionary containing the official name and opening hours (Monday–Sunday)
+    - Status and error message if the place or hours cannot be retrieved
+
+    Useful for:
+    - Scheduling visits when places are open
+    - Avoiding closures or mistimed recommendations
     """
+
     place_id = find_place_id(place_name, location)
     if not place_id:
         return {"status": "error", "message": f"Place not found: {place_name}"}
@@ -46,9 +61,24 @@ def get_place_opening_hours(place_name: str, location: str) -> dict:
     else:
         return {"status": "error", "message": "No opening hours available for this place."}
 
+
+
 def get_place_description(place_name: str, location: str) -> dict:
     """
-    Returns basic details of a place such as name, address, rating, total reviews, and summary (if available).
+    Retrieves basic information about a place using the Google Places API.
+
+    Parameters:
+    - place_name: The name of the place (e.g., 'Tower of London')
+    - location: A contextual location to refine the query (e.g., 'London')
+
+    Returns:
+    - A dictionary with place name, address, rating, total number of reviews,
+      and a brief editorial summary (if available)
+    - Includes error messages if the place cannot be found
+
+    Useful for:
+    - Writing rich, trustworthy descriptions of destinations
+    - Filtering out low-rated or poorly reviewed locations
     """
     place_id = find_place_id(place_name, location)
     if not place_id:
@@ -70,3 +100,6 @@ def get_place_description(place_name: str, location: str) -> dict:
         "total_reviews": result.get("user_ratings_total"),
         "summary": result.get("editorial_summary", {}).get("overview", "No summary available.")
     }
+
+place_open_hours_tool = FunctionTool(get_place_opening_hours)
+place_description_tool = FunctionTool(get_place_description)

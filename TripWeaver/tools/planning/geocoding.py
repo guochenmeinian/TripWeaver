@@ -4,13 +4,31 @@ import requests
 from typing import List
 from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from google.adk.tools import FunctionTool
+
 
 load_dotenv()
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAP_API_KEY")
 
 
 def get_geolocations(addresses: List[str]) -> List[dict]:
+    """
+    Convert a list of address strings into geographic coordinates (latitude and longitude).
 
+    Parameters:
+    - addresses: A list of human-readable location strings (e.g., ['Empire State Building, NY'])
+
+    Returns:
+    - A list of dictionaries containing:
+      - formatted address
+      - latitude and longitude
+      - status and optional error messages for each input address
+
+    Useful for:
+    - Mapping
+    - Distance estimation
+    - Weather lookup by coordinates
+    """
     results = []
 
     def geocode_job(address: str) -> dict:
@@ -56,3 +74,5 @@ def get_geolocations(addresses: List[str]) -> List[dict]:
             results.append(future.result())
 
     return results
+
+geolocation_tool = FunctionTool(get_geolocations)
