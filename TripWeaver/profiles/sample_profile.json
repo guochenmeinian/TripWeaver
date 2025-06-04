@@ -1,0 +1,44 @@
+{
+    "state": 
+      {
+        "user_profile" : {
+          "passport_nationality" : "US",
+          "food_preference": "",
+          "allergies": ["N/A"],
+          "likes": ["music", "art", "tech"],
+          "dislikes": ["bugs"],
+          "price_range_min": "",
+          "price_range_max": "",
+          "preferred_travel_mode": "self-drive"
+        },
+        
+        "origin" : "",
+        "destination" : "",
+        "start_date" : "2025-06-8",
+        "end_date" : "2025-06-12",
+
+        "outbound_flight_selection" : "",
+        "outbound_seat_number" : "",
+        "return_flight_selection" : "",
+        "return_seat_number" : "",
+        "hotel_selection" : "",
+        "room_selection" : "",
+
+        "place_suggestions": {
+          "places": []
+        },
+        "poi_suggestions": {
+          "places": []
+        },
+        
+        "daily_itinerary_plan": [
+          {
+            "date": "",
+            "city": "",
+            "spots": [],
+            "events": [],
+            "notes": ""
+          }
+        ]
+      }
+  }

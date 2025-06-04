@@ -14,7 +14,7 @@ from pydantic import ValidationError
 
 # Path to initial scenario file
 SAMPLE_SCENARIO_PATH = os.getenv(
-    "TRAVEL_CONCIERGE_SCENARIO", "TripWeaver/profiles/itinerary_empty_default.json"
+    "TRAVEL_CONCIERGE_SCENARIO", "TripWeaver/profiles/empty_profile.json"
 )
 
 # Key used in memory state for storing the trip plan

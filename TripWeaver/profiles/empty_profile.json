@@ -3,21 +3,15 @@
     {
       "user_profile" : {
         "passport_nationality" : "",
-        "seat_preference": "",
         "food_preference": "",
         "allergies": [],
         "likes": [],
         "dislikes": [],
-        "price_sensitivity": [],
-        "home":
-          {
-              "event_type": "",
-              "address": "",
-              "local_prefer_mode": ""
-          }
+        "price_range_min": "",
+        "price_range_max": "",
+        "preferred_travel_mode": ""
       },
       
-      "itinerary": {},
       "origin" : "",
       "destination" : "",
       "start_date" : "",

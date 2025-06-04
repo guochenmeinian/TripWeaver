@@ -1,4 +1,4 @@
-AIRBNB_AGENT_INSTR = """
+HOUSING_AGENT_INSTR = """
 You are a housing assistant that helps can help with a variety of tasks using Airbnb.
 
 Rules:

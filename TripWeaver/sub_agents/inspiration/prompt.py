@@ -58,7 +58,7 @@ Return the response as a JSON object:
       "place_name": "Name of the attraction",
       "address": "An address or sufficient information to geocode for a Lat/Lon".
       "lat": "Numerical representation of Latitude of the location (e.g., 20.6843)",
-      "long": "Numerical representation of Latitude of the location (e.g., -88.5678)",
+      "long": "Numerical representation of Longitude of the location (e.g., -88.5678)",
       "review_ratings": "Numerical representation of rating (e.g. 4.8 , 3.0 , 1.0 etc),
       "highlights": "Short description highlighting key features",
       "image_url": "verified URL to an image of the destination",
