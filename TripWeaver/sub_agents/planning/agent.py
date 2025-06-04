@@ -3,10 +3,10 @@ import requests
 from dotenv import load_dotenv
 from google.adk.agents import Agent
 from TripWeaver.sub_agents.planning import prompt
-from TripWeaver.tools.planning_tools.weather import get_weather_forecast
-from TripWeaver.tools.planning_tools.geocoding import get_geolocations
-from TripWeaver.tools.planning_tools.distance import get_distance
-from TripWeaver.tools.planning_tools.place_info import get_place_opening_hours, get_place_description
+from TripWeaver.tools.planning.weather import get_weather_forecast
+from TripWeaver.tools.planning.geocoding import get_geolocations
+from TripWeaver.tools.planning.distance import get_distance
+from TripWeaver.tools.planning.place_info import get_place_opening_hours, get_place_description
 
 planning_agent = Agent(
     name="planning_agent",
