@@ -6,7 +6,6 @@ from google.adk.tools import FunctionTool
 
 load_dotenv()
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAP_API_KEY")
-print("GOOGLE_MAPS_API_KEY:", GOOGLE_MAPS_API_KEY)
 
 
 def get_distance(origins: list[str], destinations: list[str], mode: str) -> dict:
