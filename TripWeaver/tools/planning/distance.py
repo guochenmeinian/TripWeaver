@@ -1,14 +1,15 @@
 import os
 from tarfile import data_filter
 import requests
+from TripWeaver.tools import memory
 from dotenv import load_dotenv
-from google.adk.tools import FunctionTool
+from google.adk.tools import FunctionTool, ToolContext
 
 load_dotenv()
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAP_API_KEY")
 
 
-def get_distance(origins: list[str], destinations: list[str], mode: str) -> dict:
+def get_distance(origins: list[str], destinations: list[str], mode: str, tool_context: ToolContext = None) -> dict:
     """
     Calculates real-world travel distances and durations between multiple origin-destination pairs.
 
@@ -57,6 +58,17 @@ def get_distance(origins: list[str], destinations: list[str], mode: str) -> dict
             "destinations": row_result
         })
     
-    return {"status": "success", "mode": mode, "distances": distances_matrix}
+    result_payload = {
+        "status": "success",
+        "mode": mode,
+        "distances": distances_matrix
+    }
+
+    if tool_context:
+        tool_context.state["planning_checklist"]["distances_calculated"] = True
+        memory.memorize("distance_info", result_payload, tool_context)
+
+
+    return result_payload
 
 distance_tool = FunctionTool(get_distance)

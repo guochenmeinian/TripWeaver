@@ -1,13 +1,14 @@
 import os
 import requests
 from dotenv import load_dotenv
-from google.adk.tools import FunctionTool
+from google.adk.tools import FunctionTool, ToolContext
+from TripWeaver.tools import memory
 
 load_dotenv()
 GOOGLE_MAPS_API_KEY = os.getenv("MAP_PLATFORM_API_KEY")
 
 
-def get_place_full_info(place_name: str, location: str) -> dict:
+def get_place_full_info(place_name: str, location: str, tool_context: ToolContext = None) -> dict:
     """
     Get Complete Place Information
 
@@ -69,7 +70,7 @@ def get_place_full_info(place_name: str, location: str) -> dict:
     detail_response = requests.get(detail_url, params=detail_params).json()
     result = detail_response.get("result", {})
 
-    return {
+    result_payload = {
         "status": "success",
         "place_name": result.get("name"),
         "address": result.get("formatted_address"),
@@ -84,6 +85,12 @@ def get_place_full_info(place_name: str, location: str) -> dict:
         "phone_number": result.get("international_phone_number"),
         "price_level": result.get("price_level")
     }
+
+    if tool_context:
+        tool_context.state["planning_checklist"]["places_info_fetched"] = True
+        memory.memorize("place_info", result_payload, tool_context)
+
+    return result_payload
 
 
 place_full_info_tool = FunctionTool(get_place_full_info)

@@ -4,14 +4,15 @@ import requests
 from typing import List
 from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from google.adk.tools import FunctionTool
+from google.adk.tools import FunctionTool, ToolContext
+from TripWeaver.tools import memory
 
 
 load_dotenv()
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAP_API_KEY")
 
 
-def get_geolocations(addresses: List[str]) -> List[dict]:
+def get_geolocations(addresses: List[str], tool_context: ToolContext = None) -> List[dict]:
     """
     Convert a list of address strings into geographic coordinates (latitude and longitude).
 
@@ -72,6 +73,10 @@ def get_geolocations(addresses: List[str]) -> List[dict]:
         futures = {executor.submit(geocode_job, addr): addr for addr in addresses}
         for future in as_completed(futures):
             results.append(future.result())
+
+    if tool_context:
+        tool_context.state["planning_checklist"]["geolocations_fetched"] = True
+        memory.memorize("geolocation_info", results, tool_context)
 
     return results
 

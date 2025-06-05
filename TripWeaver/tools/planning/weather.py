@@ -3,11 +3,12 @@ import os
 import requests
 from dotenv import load_dotenv
 from collections import defaultdict
-from google.adk.tools import FunctionTool  
+from google.adk.tools import FunctionTool, ToolContext
+from TripWeaver.tools import memory
 
 load_dotenv()
 
-def get_weather_forecast(city: str, start_date_str: str) -> dict:
+def get_weather_forecast(city: str, start_date_str: str, tool_context: ToolContext = None) -> dict:
     """Get a 5-day weather forecast (in 3-hour intervals) for a given city starting from a specific date.
     
     Useful for adjusting daily travel plans based on weather conditions like rain or sunshine.
@@ -49,12 +50,18 @@ def get_weather_forecast(city: str, start_date_str: str) -> dict:
                 "date": day.strftime("%Y-%m-%d"),
                 "details": daily_forecasts[day]
             })
-
-    return {
+    
+    result_payload = {
         "status": "success",
         "city": city,
         "start_date": start_date_str,
         "forecast": forecast_result
     }
+
+    if tool_context:
+        tool_context.state["planning_checklist"]["weather_fetched"] = True
+        memory.memorize("weather_forecast", result_payload, tool_context)
+
+    return result_payload
 
 weather_tool = FunctionTool(get_weather_forecast)

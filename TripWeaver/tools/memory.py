@@ -87,3 +87,28 @@ def _load_precreated_itinerary(callback_context: CallbackContext):
         data = json.load(file)
         print(f"\nLoading Initial State: {data}\n")
     _set_initial_states(data["state"], callback_context.state)
+
+
+def mark_checklist_done(item: str, tool_context: ToolContext):
+    if tool_context.state.get("current_agent") != "planning_agent":
+        return {"error": f"Checklist update not allowed: current agent is {tool_context.state.get('current_agent')}"}
+    checklist = tool_context.state.get("planning_checklist", {})
+    if item not in checklist:
+        return {"error": f"Invalid checklist item: {item}"}
+    checklist[item] = True
+    return {"status": f"Marked '{item}' as done."}
+
+
+def is_checklist_complete(tool_context: ToolContext) -> bool:
+    if tool_context.state.get("current_agent") != "planning_agent":
+        return False
+    checklist = tool_context.state.get("planning_checklist", {})
+    return all(checklist.get(k, False) for k in [
+        "weather_fetched",
+        "places_selected",
+        "places_info_fetched",
+        "distances_calculated",
+        "places_grouped",
+        "proximity_search_done",
+        "lodging_fetched"
+    ])

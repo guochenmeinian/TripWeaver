@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 from typing import List, Optional
 from TripWeaver.tools.planning.geocoding import get_geolocations
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from google.adk.tools import FunctionTool
+from google.adk.tools import FunctionTool, ToolContext
+from TripWeaver.tools import memory
 
 load_dotenv()
 GOOGLE_MAPS_API_KEY = os.getenv("MAP_PLATFORM_API_KEY")
@@ -13,7 +14,8 @@ def get_places_near_locations(
     addresses: List[str],
     radius: int = 500,
     place_type: str = "restaurant", 
-    keyword: Optional[str] = None  
+    keyword: Optional[str] = None,  
+    tool_context: ToolContext = None
 ) -> List[dict]:
     """
     Finds nearby places (restaurants, hotels, attractions, etc.) around a list of addresses.
@@ -77,6 +79,10 @@ def get_places_near_locations(
         ]
         for future in as_completed(futures):
             future.result()
+
+    if tool_context: 
+        tool_context.state["planning_checklist"]["proximity_search_done"] = True
+        memory.memorize("places_nearby", all_results, tool_context)
 
     return all_results
 
