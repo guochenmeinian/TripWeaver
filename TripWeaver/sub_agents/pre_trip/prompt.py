@@ -27,7 +27,7 @@ Each item in the trip_plan should look like this:
   "city": "Kyoto",
   "check_in": "2025-07-03",
   "check_out": "2025-07-06",
-  "transit_from_previous": "shinkansen"  // Optional for the first city
+  "transit_from_previous": "shinkansen"
 }}
 
 You must return the response as a JSON object in the following format:
