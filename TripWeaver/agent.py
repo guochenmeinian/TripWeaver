@@ -14,9 +14,8 @@ from TripWeaver.tools.memory import _load_precreated_itinerary
 
 SequentialAgentGroup(
     agents=[
-        pre_trip_agent,       # 收集 trip_plan + 偏好信息
-        # weather_agent,        # 根据 trip_plan 查询城市天气
-        inspiration_agent, 
+        pre_trip_agent,         # 收集 trip_plan + 偏好信息
+        inspiration_agent,
         # activities_agent,     # 根据 trip_plan 和 偏好信息 查询城市活动
         housing_agent,
         # planning_agent,       # 根据 trip_plan 和 候选项 生成行程
