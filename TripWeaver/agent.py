@@ -10,11 +10,16 @@ from TripWeaver.sub_agents.pre_trip.agent import pre_trip_agent
 from TripWeaver.sub_agents.housing.agent import housing_agent
 from TripWeaver.tools.memory import _load_precreated_itinerary
 
-sub_agents = [
-    inspiration_agent,
-    pre_trip_agent,
-    housing_agent,
-]
+SequentialAgentGroup(
+    agents=[
+        pre_trip_agent,       # 收集 trip_plan + 偏好信息
+        # weather_agent,        # 根据 trip_plan 查询城市天气
+        inspiration_agent, 
+        housing_agent,
+        # planning_agent,       # 根据 trip_plan 和 候选项 生成行程
+    ]
+)
+
 
 root_agent = LlmAgent(
     model="gemini-2.0-flash-001",

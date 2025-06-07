@@ -12,9 +12,14 @@ from google.adk.tools import ToolContext
 from TripWeaver.shared_libraries import constants
 from pydantic import ValidationError
 
+from datetime import datetime, timedelta
+
 # Path to initial scenario file
-SAMPLE_SCENARIO_PATH = os.getenv(
+EMPTY_SCENARIO_PATH = os.getenv(
     "TRAVEL_CONCIERGE_SCENARIO", "TripWeaver/profiles/empty_profile.json"
+)
+SAMPLE_SCENARIO_PATH = os.getenv(
+    "TRAVEL_CONCIERGE_SCENARIO", "TripWeaver/profiles/sample_profile.json"
 )
 
 # Key used in memory state for storing the trip plan
@@ -87,3 +92,39 @@ def _load_precreated_itinerary(callback_context: CallbackContext):
         data = json.load(file)
         print(f"\nLoading Initial State: {data}\n")
     _set_initial_states(data["state"], callback_context.state)
+
+
+
+
+def _expand_trip_plan_to_daily_itinerary(callback_context: CallbackContext):
+    """
+    After-agent callback: use trip_plan to create daily_itinerary_plan.
+    Runs after pre_trip_agent completes and user_profile is available.
+    """
+    state = callback_context.state
+    profile = state.memory.get("user_profile", {})
+    trip_plan = profile.get("trip_plan", [])
+    daily_plan = []
+
+    for leg in trip_plan:
+        city = leg.get("city")
+        check_in = leg.get("check_in")
+        check_out = leg.get("check_out")
+        if not city or not check_in or not check_out:
+            continue
+
+        s = datetime.strptime(check_in, "%Y-%m-%d")
+        e = datetime.strptime(check_out, "%Y-%m-%d")
+
+        while s < e:
+            daily_plan.append({
+                "date": s.strftime("%Y-%m-%d"),
+                "city": city,
+                "spots": [],
+                "events": [],
+                "notes": ""
+            })
+            s += timedelta(days=1)
+
+    state.memory["daily_itinerary_plan"] = daily_plan
+    print(f"\n✅ Daily itinerary initialized from trip_plan: {daily_plan}\n")

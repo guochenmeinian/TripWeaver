@@ -2,25 +2,24 @@
     "state": 
       {
         "user_profile": {
-        "food_preference": "",
-        "likes": [],
-        "dislikes": [],
-        "price_range": "",
-        "trip_plan": 
-          [
-            {
-              "city": "",
-              "check_in": "",
-              "check_out": "",
-              "transit_from_previous": ""
-            }
-          ]
-        },
-        
-        "origin" : "",
-        "destination" : "",
-        "start_date" : "2025-06-8",
-        "end_date" : "2025-06-12",
+          "food_preference": "",
+          "likes": [],
+          "dislikes": [],
+          "price_range": "",
+          "origin" : "",
+          "destination" : "",
+          "start_date" : "",
+          "end_date" : "",
+          "trip_plan": 
+            [
+              {
+                "city": "",
+                "check_in": "",
+                "check_out": "",
+                "transit_from_previous": ""
+              }
+            ]
+        },        
 
         "outbound_flight_selection" : "",
         "outbound_seat_number" : "",
@@ -40,6 +39,7 @@
           {
             "date": "",
             "city": "",
+            "weather": "",
             "spots": [],
             "events": [],
             "notes": ""
