@@ -4,6 +4,8 @@
 from google.adk.agents import Agent
 from google.adk.agents import LlmAgent
 from TripWeaver.prompt import ROOT_AGENT_INSTR
+from google.adk.agent_groups import SequentialAgentGroup, ParallelAgentGroup
+
 from TripWeaver.sub_agents.inspiration.agent import inspiration_agent
 from TripWeaver.sub_agents.pre_trip.agent import pre_trip_agent
 # from TripWeaver.sub_agents.planning.agent import planning_agent
@@ -15,6 +17,7 @@ SequentialAgentGroup(
         pre_trip_agent,       # 收集 trip_plan + 偏好信息
         # weather_agent,        # 根据 trip_plan 查询城市天气
         inspiration_agent, 
+        # activities_agent,     # 根据 trip_plan 和 偏好信息 查询城市活动
         housing_agent,
         # planning_agent,       # 根据 trip_plan 和 候选项 生成行程
     ]
