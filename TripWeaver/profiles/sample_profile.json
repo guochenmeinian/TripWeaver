@@ -1,15 +1,20 @@
 {
     "state": 
       {
-        "user_profile" : {
-          "passport_nationality" : "US",
-          "food_preference": "",
-          "allergies": ["N/A"],
-          "likes": ["music", "art", "tech"],
-          "dislikes": ["bugs"],
-          "price_range_min": "",
-          "price_range_max": "",
-          "preferred_travel_mode": "self-drive"
+        "user_profile": {
+        "food_preference": "",
+        "likes": [],
+        "dislikes": [],
+        "price_range": "",
+        "trip_plan": 
+          [
+            {
+              "city": "",
+              "check_in": "",
+              "check_out": "",
+              "transit_from_previous": ""
+            }
+          ]
         },
         
         "origin" : "",

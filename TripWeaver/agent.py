@@ -13,7 +13,7 @@ from TripWeaver.tools.memory import _load_precreated_itinerary
 sub_agents = [
     inspiration_agent,
     pre_trip_agent,
-    housing_agent, 
+    housing_agent,
 ]
 
 root_agent = LlmAgent(

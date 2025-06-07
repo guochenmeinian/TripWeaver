@@ -1,15 +1,20 @@
 {
   "state": 
     {
-      "user_profile" : {
-        "passport_nationality" : "",
+      "user_profile": {
         "food_preference": "",
-        "allergies": [],
         "likes": [],
         "dislikes": [],
-        "price_range_min": "",
-        "price_range_max": "",
-        "preferred_travel_mode": ""
+        "price_range": "",
+        "trip_plan": 
+          [
+            {
+              "city": "",
+              "check_in": "",
+              "check_out": "",
+              "transit_from_previous": ""
+            }
+          ]
       },
       
       "origin" : "",
