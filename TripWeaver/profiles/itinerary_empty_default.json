@@ -1,23 +1,26 @@
 {
   "state": 
     {
-      "user_profile" : {
-        "passport_nationality" : "",
-        "seat_preference": "",
+      "user_profile": {
         "food_preference": "",
-        "allergies": [],
         "likes": [],
         "dislikes": [],
-        "price_sensitivity": [],
-        "home":
-          {
-              "event_type": "",
-              "address": "",
-              "local_prefer_mode": ""
-          }
+        "price_range": "",
+        "origin" : "",
+        "destination" : "",
+        "start_date" : "",
+        "end_date" : "",
+        "trip_plan": 
+          [
+            {
+              "city": "",
+              "check_in": "",
+              "check_out": "",
+              "transit_from_previous": ""
+            }
+          ]
       },
       
-      "itinerary": {},
       "origin" : "",
       "destination" : "",
       "start_date" : "",

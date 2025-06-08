@@ -6,6 +6,16 @@ from google.adk.tools.agent_tool import AgentTool
 from TripWeaver.shared_libraries.types import GeminiSpotSuggestions, POISuggestions, json_response_config
 from TripWeaver.sub_agents.inspiration import prompt
 from TripWeaver.tools.places import map_tool
+from TripWeaver.tools.planning.weather import weather_tool
+
+weather_agent = Agent(
+    model="gemini-2.0-flash",
+    name="weather_agent",
+    description="This agent provides weather information given a place",
+    instruction=prompt.WEATHER_AGENT_INSTR,
+    disallow_transfer_to_parent=True,
+    disallow_transfer_to_peers=True,
+)
 
 place_agent = Agent(
     model="gemini-2.0-flash",
@@ -36,5 +46,5 @@ inspiration_agent = Agent(
     name="inspiration_agent",
     description="A travel inspiration agent who inspire users, and discover their next vacations; Provide information about places, activities, interests.",
     instruction=prompt.INSPIRATION_AGENT_INSTR,
-    tools=[AgentTool(agent=place_agent), AgentTool(agent=poi_agent), map_tool],
+    tools=[weather_agent, AgentTool(agent=place_agent), AgentTool(agent=poi_agent), map_tool],
 )

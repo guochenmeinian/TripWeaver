@@ -14,6 +14,8 @@ cd TripWeaver
 2. Install dependencies (python 3.12 required):
 
 ```
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 

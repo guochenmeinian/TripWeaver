@@ -112,3 +112,36 @@ def is_checklist_complete(tool_context: ToolContext) -> bool:
         "proximity_search_done",
         "lodging_fetched"
     ])
+
+def _expand_trip_plan_to_daily_itinerary(callback_context: CallbackContext):
+    """
+    After-agent callback: use trip_plan to create daily_itinerary_plan.
+    Runs after pre_trip_agent completes and user_profile is available.
+    """
+    state = callback_context.state
+    profile = state.memory.get("user_profile", {})
+    trip_plan = profile.get("trip_plan", [])
+    daily_plan = []
+
+    for leg in trip_plan:
+        city = leg.get("city")
+        check_in = leg.get("check_in")
+        check_out = leg.get("check_out")
+        if not city or not check_in or not check_out:
+            continue
+
+        s = datetime.strptime(check_in, "%Y-%m-%d")
+        e = datetime.strptime(check_out, "%Y-%m-%d")
+
+        while s < e:
+            daily_plan.append({
+                "date": s.strftime("%Y-%m-%d"),
+                "city": city,
+                "spots": [],
+                "events": [],
+                "notes": ""
+            })
+            s += timedelta(days=1)
+
+    state.memory["daily_itinerary_plan"] = daily_plan
+    print(f"\n✅ Daily itinerary initialized from trip_plan: {daily_plan}\n")

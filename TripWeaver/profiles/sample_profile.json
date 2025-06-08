@@ -1,0 +1,49 @@
+{
+    "state": 
+      {
+        "user_profile": {
+          "food_preference": "",
+          "likes": [],
+          "dislikes": [],
+          "price_range": "",
+          "origin" : "",
+          "destination" : "",
+          "start_date" : "",
+          "end_date" : "",
+          "trip_plan": 
+            [
+              {
+                "city": "",
+                "check_in": "",
+                "check_out": "",
+                "transit_from_previous": ""
+              }
+            ]
+        },        
+
+        "outbound_flight_selection" : "",
+        "outbound_seat_number" : "",
+        "return_flight_selection" : "",
+        "return_seat_number" : "",
+        "hotel_selection" : "",
+        "room_selection" : "",
+
+        "place_suggestions": {
+          "places": []
+        },
+        "poi_suggestions": {
+          "places": []
+        },
+        
+        "daily_itinerary_plan": [
+          {
+            "date": "",
+            "city": "",
+            "weather": "",
+            "spots": [],
+            "events": [],
+            "notes": ""
+          }
+        ]
+      }
+  }
