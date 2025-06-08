@@ -102,7 +102,7 @@ def _expand_trip_plan_to_daily_itinerary(callback_context: CallbackContext):
     Runs after pre_trip_agent completes and user_profile is available.
     """
     state = callback_context.state
-    profile = state.memory.get("user_profile", {})
+    profile = state.get("user_profile", {})
     trip_plan = profile.get("trip_plan", [])
     daily_plan = []
 
@@ -126,5 +126,5 @@ def _expand_trip_plan_to_daily_itinerary(callback_context: CallbackContext):
             })
             s += timedelta(days=1)
 
-    state.memory["daily_itinerary_plan"] = daily_plan
+    state["daily_itinerary_plan"] = daily_plan
     print(f"\n✅ Daily itinerary initialized from trip_plan: {daily_plan}\n")

@@ -4,6 +4,8 @@ from TripWeaver.sub_agents.pre_trip.prompt import UPDATE_PROFILE_INSTR, PRETRIP_
 from TripWeaver.shared_libraries.types import GeminiUserProfile, json_response_config
 from google.adk.tools.agent_tool import AgentTool
 from TripWeaver.tools.memory import _expand_trip_plan_to_daily_itinerary
+from google.adk.agents import LlmAgent
+
 
 update_profile_agent = Agent(
     name="update_profile_agent",
@@ -17,11 +19,11 @@ update_profile_agent = Agent(
     generate_content_config=json_response_config
 )
 
-pre_trip_agent = Agent(
+pre_trip_agent = LlmAgent(
     name="pre_trip_agent",
     model="gemini-2.0-flash",
     description="Conversationally gathers missing user profile fields",
     instruction=PRETRIP_COLLECTOR_INSTR,
     tools=[AgentTool(agent=update_profile_agent)],
-    after_agent_callback=_expand_trip_plan_to_daily_itinerary
+    after_agent_callback=_expand_trip_plan_to_daily_itinerary,
 )
