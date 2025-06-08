@@ -13,5 +13,5 @@ planning_agent = Agent(
     model="gemini-2.0-flash",
     description="Generates travel itineraries based on user input and optionally checks weather.",
     instruction=prompt.PLANNING_AGENT_INSTR,
-    tools=[get_weather_forecast, get_geolocations, get_distance, get_place_opening_hours, get_place_description],
+    tools=[get_geolocations, get_distance, get_place_opening_hours, get_place_description],
 )
