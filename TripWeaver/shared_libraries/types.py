@@ -38,25 +38,27 @@ class Spot(BaseModel):
     image_url: Optional[str] = None
 
 
+
 class SpotSuggestions(BaseModel):
     spots: List[Spot]
 
 
-class HomeAddress(BaseModel):
+
+class Event(BaseModel):
     event_type: str
     address: str
     local_prefer_mode: str
 
 
+class EventSuggestions(BaseModel):
+    events: List[Event]
+
+
 class UserProfile(BaseModel):
-    passport_nationality: str
-    seat_preference: str
-    food_preference: str
-    allergies: List[str]
     likes: List[str]
     dislikes: List[str]
-    price_sensitivity: List[str]
-    home: HomeAddress
+    food_preference: str
+    price_range: str
 
 
 class HousingOption(BaseModel):
@@ -80,7 +82,20 @@ class BasicTripEntry(BaseModel):
 class BasicTripPlanSchema(BaseModel):
     trip_plan: List[BasicTripEntry]
 
+
+
+
+class DailyEntry(BaseModel):
+    city: str = Field(..., description="Name of the city")
+    date: str = Field(..., description="Date in YYYY-MM-DD format")
+    weather: str = Field(..., description="Weather conditions")
+    temperature: str = Field(..., description="Temperature")
+    events: List[Event] = Field(..., description="Events")
+    spots: List[Spot] = Field(..., description="Spots")
+    restaurant: str = Field(..., description="Restaurant")
+    transit_from_previous: str = Field(..., description="How the user will arrive from the previous city")
     
+
 
 class CostEstimate(BaseModel):
     amount: float
@@ -95,12 +110,6 @@ class Rating(BaseModel):
     user_rating: Optional[float] = None
     review_count: Optional[int] = None
 
-
-class Location(BaseModel):
-    name: str
-    address: Optional[str] = None
-    city: Optional[str] = None
-    country: Optional[str] = None
 
 
 class POI(BaseModel):
@@ -128,6 +137,4 @@ class POISuggestions(BaseModel):
     """Points of interest recommendation."""
     places: list[POI]
     
-
-
 
