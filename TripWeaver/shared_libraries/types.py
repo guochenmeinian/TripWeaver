@@ -71,7 +71,16 @@ class HousingResults(BaseModel):
     housing_options: List[HousingOption]
 
 
+class BasicTripEntry(BaseModel):
+    city: str = Field(..., description="Name of the city")
+    check_in: str = Field(..., description="Check-in date in YYYY-MM-DD format")
+    check_out: str = Field(..., description="Check-out date in YYYY-MM-DD format")
+    transit_from_previous: str = Field(..., description="How the user will arrive from the previous city")
 
+class BasicTripPlanSchema(BaseModel):
+    trip_plan: List[BasicTripEntry]
+
+    
 
 # === Full Spot for itinerary/planning ===
 class LocalizedString(BaseModel):

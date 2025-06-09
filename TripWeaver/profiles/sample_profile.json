@@ -9,18 +9,10 @@
           "origin" : "",
           "destination" : "",
           "start_date" : "",
-          "end_date" : "",
-          "trip_plan": 
-            [
-              {
-                "city": "",
-                "check_in": "",
-                "check_out": "",
-                "transit_from_previous": ""
-              }
-            ]
+          "end_date" : ""
         },        
-
+        "trip_plan": [],
+        
         "outbound_flight_selection" : "",
         "outbound_seat_number" : "",
         "return_flight_selection" : "",
@@ -35,15 +27,6 @@
           "places": []
         },
         
-        "daily_itinerary_plan": [
-          {
-            "date": "",
-            "city": "",
-            "weather": "",
-            "spots": [],
-            "events": [],
-            "notes": ""
-          }
-        ]
+        "daily_itinerary_plan": []
       }
-  }
+}

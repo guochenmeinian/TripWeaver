@@ -23,7 +23,7 @@ housing_agent_in_parallel = make_housing_agent()
 parallel_housing_activities = ParallelAgent(
     name="parallel_housing_activities",
     sub_agents=[
-        housing_agent_in_parallel
+        # housing_agent_in_parallel
         # activities_agent # Uncomment when activities_agent is defined and imported
     ]
 )
@@ -33,7 +33,7 @@ sub_agents_group = SequentialAgent( # Renamed variable to avoid confusion, thoug
     name="trip_pipeline",
     sub_agents=[
         pre_trip_agent,              # Step 1: Collect trip plan + preferences
-        # inspiration_agent,           # Step 2: Get weather and inspiration
+        inspiration_agent,           # Step 2: Get weather and inspiration
         # parallel_housing_activities, # Step 3: Parallel fetching of accommodation + activity suggestions
         # planning_agent             # Step 4: Build final daily itinerary plan
     ]
