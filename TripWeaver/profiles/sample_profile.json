@@ -5,11 +5,7 @@
           "food_preference": "",
           "likes": [],
           "dislikes": [],
-          "price_range": "",
-          "origin" : "",
-          "destination" : "",
-          "start_date" : "",
-          "end_date" : ""
+          "price_range": ""
         },        
         "trip_plan": [],
         

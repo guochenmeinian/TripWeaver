@@ -5,7 +5,7 @@ from google.adk.tools.agent_tool import AgentTool
 # You might also need FunctionTool if map_tool is a FunctionTool directly
 # from google.adk.tools import FunctionTool 
 
-from TripWeaver.shared_libraries.types import GeminiSpotSuggestions, POISuggestions, json_response_config
+from TripWeaver.shared_libraries.types import SpotSuggestions, POISuggestions, json_response_config
 from TripWeaver.sub_agents.inspiration import prompt
 from TripWeaver.tools.places import map_tool
 # Assuming weather_tool here refers to the FunctionTool created from get_weather_forecast
@@ -35,7 +35,7 @@ place_agent = Agent(
     description="This agent suggests a few destination given some user preferences",
     disallow_transfer_to_parent=True,
     disallow_transfer_to_peers=True,
-    output_schema=GeminiSpotSuggestions,
+    output_schema=SpotSuggestions,
     output_key="place_suggestions",
     generate_content_config=json_response_config,
 )

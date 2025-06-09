@@ -8,21 +8,21 @@ json_response_config = types.GenerateContentConfig(
     response_mime_type="application/json"
 )
 
-# === Gemini-compatible output structure ===
-class GeminiLocation(BaseModel):
+
+class Location(BaseModel):
     name: str
     address: Optional[str] = None
     city: Optional[str] = None
     country: Optional[str] = None
 
 
-class GeminiTimeSlot(BaseModel):
+class TimeSlot(BaseModel):
     start_time: str  # "09:00"
     end_time: str    # "10:30"
     description: Optional[str] = None
 
 
-class GeminiSpot(BaseModel):
+class Spot(BaseModel):
     id: str
     name: str
     category: str  # one of sightseeing, food, museum, nature, activity
@@ -38,17 +38,17 @@ class GeminiSpot(BaseModel):
     image_url: Optional[str] = None
 
 
-class GeminiSpotSuggestions(BaseModel):
-    spots: List[GeminiSpot]
+class SpotSuggestions(BaseModel):
+    spots: List[Spot]
 
 
-class GeminiHomeAddress(BaseModel):
+class HomeAddress(BaseModel):
     event_type: str
     address: str
     local_prefer_mode: str
 
 
-class GeminiUserProfile(BaseModel):
+class UserProfile(BaseModel):
     passport_nationality: str
     seat_preference: str
     food_preference: str
@@ -56,7 +56,7 @@ class GeminiUserProfile(BaseModel):
     likes: List[str]
     dislikes: List[str]
     price_sensitivity: List[str]
-    home: GeminiHomeAddress
+    home: HomeAddress
 
 
 class HousingOption(BaseModel):
@@ -81,23 +81,6 @@ class BasicTripPlanSchema(BaseModel):
     trip_plan: List[BasicTripEntry]
 
     
-
-# === Full Spot for itinerary/planning ===
-class LocalizedString(BaseModel):
-    default: str
-    translations: Dict[str, str] = Field(default_factory=dict)
-
-
-class SpotRelation(BaseModel):
-    related_id: str
-    relation: str
-
-
-class TimeSlot(BaseModel):
-    start: time
-    end: time
-    description: Optional[str] = None
-
 
 class CostEstimate(BaseModel):
     amount: float
@@ -145,23 +128,6 @@ class POISuggestions(BaseModel):
     """Points of interest recommendation."""
     places: list[POI]
     
-
-class Spot(BaseModel):
-    id: str
-    name: LocalizedString
-    category: List[Literal["sightseeing", "food", "museum", "nature", "accommodation", "activity", "transport"]]
-    location: Location
-    description: Optional[LocalizedString] = None
-    time_slot: TimeSlot
-    duration_minutes: Optional[int] = None
-    transit_time: Optional[int] = None
-    cost: Optional[CostEstimate] = None
-    rating: Optional[Rating] = None
-    suggestions: List[LocalizedString] = Field(default_factory=list)
-    related_spots: List[SpotRelation] = Field(default_factory=list)
-    external_links: Dict[str, HttpUrl] = Field(default_factory=dict)
-    notes: Optional[LocalizedString] = None
-    confirmed: bool = False
 
 
 

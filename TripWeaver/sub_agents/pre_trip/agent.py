@@ -1,7 +1,7 @@
 # TripWeaver/sub_agents/pre_trip/collector_agent.py
 from google.adk.agents import Agent
 from TripWeaver.sub_agents.pre_trip.prompt import UPDATE_PROFILE_INSTR, PRETRIP_COLLECTOR_INSTR, TRIP_PLAN_INSTR
-from TripWeaver.shared_libraries.types import GeminiUserProfile, json_response_config, BasicTripPlanSchema
+from TripWeaver.shared_libraries.types import UserProfile, json_response_config, BasicTripPlanSchema
 from google.adk.tools.agent_tool import AgentTool
 from google.adk.agents import LlmAgent
 
@@ -13,7 +13,7 @@ update_profile_agent = Agent(
     instruction=UPDATE_PROFILE_INSTR,
     disallow_transfer_to_parent=True,
     disallow_transfer_to_peers=True,
-    output_schema=GeminiUserProfile,
+    output_schema=UserProfile,
     output_key="user_profile",
     generate_content_config=json_response_config
 )
